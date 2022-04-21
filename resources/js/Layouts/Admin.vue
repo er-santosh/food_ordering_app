@@ -1,7 +1,12 @@
 <script setup>
 import { computed } from "vue";
 import { useStore } from "vuex";
-import menu from "@/menu.js";
+import sidebar_menu from "@/sidebar_menu.js";
+import { usePage } from "@inertiajs/inertia-vue3";
+
+const menuType = usePage().props.value.user?.user_type;
+const menu = sidebar_menu[menuType];
+
 const store = useStore();
 store.dispatch("fullScreenToggle", false);
 store.dispatch("darkMode", true);

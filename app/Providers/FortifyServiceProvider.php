@@ -55,13 +55,13 @@ class FortifyServiceProvider extends ServiceProvider
 
             if ($user->status != 'active') {
                 redirect()->back()->with('message', 'Your account is disabled!');
-            }
-
-            if (
-                $user &&
-                Hash::check($request->password, $user->password)
-            ) {
-                return $user;
+            } else {
+                if (
+                    $user &&
+                    Hash::check($request->password, $user->password)
+                ) {
+                    return $user;
+                }
             }
         });
 

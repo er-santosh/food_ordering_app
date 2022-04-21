@@ -60,7 +60,10 @@ const logout = () => {
               <!-- Navigation Links -->
               <div
                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
-                v-if="$page.props.user && $page.props.user?.user_type != 'user'"
+                v-if="
+                  $page.props.user &&
+                  !['user', 'delivery'].includes($page.props.user.user_type)
+                "
               >
                 <JetNavLink
                   :href="route(`${$page.props.user?.user_type}.dashboard`)"
@@ -240,7 +243,10 @@ const logout = () => {
                 :active="
                   route().current(`${$page.props.user?.user_type}.dashboard`)
                 "
-                v-if="$page.props.user && $page.props.user.user_type != 'user'"
+                v-if="
+                  $page.props.user &&
+                  !['user', 'delivery'].includes($page.props.user.user_type)
+                "
                 class="border-none"
               >
                 Dashboard
@@ -310,7 +316,10 @@ const logout = () => {
           class="sm:hidden"
         >
           <div
-            v-if="$page.props.user && $page.props.user?.user_type !== 'user'"
+            v-if="
+              $page.props.user &&
+              !['user', 'delivery'].includes($page.props.user.user_type)
+            "
             class="pt-2 pb-3 space-y-1"
           >
             <JetResponsiveNavLink

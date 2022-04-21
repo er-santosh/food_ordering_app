@@ -17,10 +17,12 @@ class CheckAuthUserType
     public function handle(Request $request, Closure $next)
     {
 
-        $route = $request->path(); // /admin/*, /restaurant/*, /delivery/*
+        $route = $request->path(); // /admin/*, /restaurant/*
         $user_type = $request->user()->user_type; // user,restaurant,delivery,admin
-
-        if (!str_starts_with($route, $user_type) && $user_type != 'admin') {
+        if ($user_type == 'delivery') {
+            abort(403);
+        }
+        if (!str_starts_with($route, $user_type) /* && $user_type != 'admin' */) {
             abort(403);
         }
 

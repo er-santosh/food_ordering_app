@@ -39,7 +39,7 @@ const menuClick = (event, item) => {
   <aside
     v-show="!isFullScreen"
     id="aside"
-    class="w-60 fixed top-0 z-40 h-screen transition-position lg:left-0 dark:border-r dark:border-gray-800 dark:bg-gray-900/70 lg:dark:bg-gray-900 xl:dark:bg-gray-900/70"
+    class="w-60 fixed top-0 z-40 h-screen transition-position lg:left-0 dark:border-r dark:border-gray-800 dark:bg-gray-900/70 lg:dark:bg-gray-900 xl:dark:bg-gray-900/70 pb-32"
     :class="[
       asideStyle,
       isAsideMobileExpanded ? 'left-0' : '-left-60',
@@ -59,7 +59,7 @@ const menuClick = (event, item) => {
         <icon :path="mdiMenu" class="cursor-pointer" size="24" />
       </nav-bar-item>
       <div class="flex-1 px-3">
-        <span>Admin</span> <b class="font-black">One</b>
+        <span>Food</span> <b class="font-black">Ordering</b>
       </div>
     </div>
     <div>

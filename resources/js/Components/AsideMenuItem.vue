@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
-import { mdiMinus, mdiPlus } from "@mdi/js";
+import { mdiMinus, mdiPlus, mdiCircleSmall } from "@mdi/js";
 
 import { Link } from "@inertiajs/inertia-vue3";
 const props = defineProps({
@@ -63,9 +63,16 @@ const menuClick = (event) => {
       :href="itemHref"
       :target="itemTarget"
       class="flex cursor-pointer dark:hover:bg-gray-700/50"
-      :class="[asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2']"
+      :class="[
+        asideMenuItemStyle,
+        isSubmenuList ? 'p-3 pl-12 text-sm' : 'py-2',
+      ]"
       @click="menuClick"
     >
+      <span v-if="isSubmenuList">
+        <icon :path="mdiCircleSmall" w="w-5" />
+      </span>
+
       <icon
         v-if="item.icon"
         :path="item.icon"
@@ -73,7 +80,9 @@ const menuClick = (event) => {
         :class="activeInactiveStyle"
         w="w-12"
       />
-      <span class="grow" :class="activeInactiveStyle">{{ item.label }}</span>
+      <span class="grow truncate" :class="activeInactiveStyle">{{
+        item.label
+      }}</span>
       <icon
         v-if="hasDropdown"
         :path="dropdownIcon"

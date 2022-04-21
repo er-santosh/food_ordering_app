@@ -21,9 +21,6 @@ class LoginResponse implements LoginResponseContract
             case 'restaurant':
                 $home = '/restaurant/dashboard';
                 break;
-            case 'delivery':
-                $home = '/delivery/dashboard';
-                break;
             default:
                 $home = '/';
                 break;
