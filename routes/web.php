@@ -22,14 +22,27 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('home');
+
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+    'auth.user_type'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Admin/Dashboard');
-    })->name('dashboard');
+    /* admin */
+    Route::prefix('admin')->group(function () {
+        Route::get('dashboard', function () {
+            return Inertia::render('Admin/Dashboard');
+        })->name('admin.dashboard');
+    });
+
+
+    /* restaurant */
+    Route::prefix('restaurant')->group(function () {
+        Route::get('dashboard', function () {
+            return Inertia::render('Admin/Dashboard');
+        })->name('restaurant.dashboard');
+    });
 });

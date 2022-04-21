@@ -52,17 +52,21 @@ const logout = () => {
             <div class="flex">
               <!-- Logo -->
               <div class="shrink-0 flex items-center">
-                <Link :href="route('dashboard')">
+                <Link :href="route('home')">
                   <JetApplicationMark class="block h-9 w-auto" />
                 </Link>
               </div>
 
               <!-- Navigation Links -->
-              <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+              <div
+                class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
+                v-if="$page.props.user && $page.props.user?.user_type != 'user'"
+              >
                 <JetNavLink
-                  :href="route('dashboard')"
-                  :active="route().current('dashboard')"
-                  v-if="$page.props.user"
+                  :href="route(`${$page.props.user?.user_type}.dashboard`)"
+                  :active="
+                    route().current(`${$page.props.user?.user_type}.dashboard`)
+                  "
                 >
                   Dashboard
                 </JetNavLink>
@@ -167,7 +171,7 @@ const logout = () => {
               </div>
 
               <!-- Settings Dropdown -->
-              <div class="ml-3 relative">
+              <div class="mx-3 relative">
                 <JetDropdown v-if="$page.props.user" align="right" width="48">
                   <template #trigger>
                     <button
@@ -231,15 +235,18 @@ const logout = () => {
                 </JetDropdown>
               </div>
 
-              <Link
-                v-if="$page.props.user"
-                :href="route('dashboard')"
-                class="text-sm text-gray-700 underline"
+              <JetNavLink
+                :href="route(`${$page.props.user?.user_type}.dashboard`)"
+                :active="
+                  route().current(`${$page.props.user?.user_type}.dashboard`)
+                "
+                v-if="$page.props.user && $page.props.user.user_type != 'user'"
+                class="border-none"
               >
                 Dashboard
-              </Link>
+              </JetNavLink>
 
-              <template v-else>
+              <template v-if="!$page.props.user">
                 <Link
                   :href="route('login')"
                   class="text-sm text-gray-700 underline"
@@ -302,16 +309,21 @@ const logout = () => {
           }"
           class="sm:hidden"
         >
-          <div v-if="$page.props.user" class="pt-2 pb-3 space-y-1">
+          <div
+            v-if="$page.props.user && $page.props.user?.user_type !== 'user'"
+            class="pt-2 pb-3 space-y-1"
+          >
             <JetResponsiveNavLink
-              :href="route('dashboard')"
-              :active="route().current('dashboard')"
+              :href="route(`${$page.props.user?.user_type}.dashboard`)"
+              :active="
+                route().current(`${$page.props.user?.user_type}.dashboard`)
+              "
             >
               Dashboard
             </JetResponsiveNavLink>
           </div>
 
-          <template v-else>
+          <template v-if="!$page.props.user">
             <JetResponsiveNavLink
               :href="route('login')"
               :active="route().current('login')"

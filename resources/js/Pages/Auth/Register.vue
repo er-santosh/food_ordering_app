@@ -1,7 +1,7 @@
 <script setup>
 import { useStore } from "vuex";
 import { useForm } from "@inertiajs/inertia-vue3";
-import { mdiAccount, mdiAsterisk } from "@mdi/js";
+import { mdiAccount, mdiEmail, mdiAsterisk } from "@mdi/js";
 
 const props = defineProps({
   errors: Object,
@@ -55,7 +55,7 @@ store.dispatch("fullScreenToggle", true);
       >
         <control
           v-model="form.email"
-          :icon="mdiAccount"
+          :icon="mdiEmail"
           name="email"
           autocomplete="email"
           type="email"
